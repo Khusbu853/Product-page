@@ -1,20 +1,30 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store';
+import useCart from './hooks/useCart';
 
 const ProductList = lazy(() => import('./components/ProductList'));
+const Header = lazy(() => import('./components/Header'));
+const ProductDetail = lazy(() => import('./components/ProductDetail'));
 
 const App: React.FC = () => {
+  useCart();
+
   return (
-    <Router>
-      <div className="App">
-        <h1 className="text-4xl font-bold text-center my-8">Product Page</h1>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Routes>
-            <Route path="/" element={<ProductList />} />
-          </Routes>
-        </Suspense>
-      </div>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <div className="App">
+          <Header/>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              <Route path="/" element={<ProductList />} />
+              <Route path="/product/:productId" element={<ProductDetail />} />
+            </Routes>
+          </Suspense>
+        </div>
+      </Router>
+    </Provider>
   );
 };
 
