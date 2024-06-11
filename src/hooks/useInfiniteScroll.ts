@@ -40,3 +40,4 @@ const useInfiniteScroll = (callback: () => void, options: Options = {}) => {
 };
 
 export default useInfiniteScroll;
+
