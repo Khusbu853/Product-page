@@ -5,7 +5,6 @@ import store from './store';
 import useCart from './hooks/useCart';
 
 const ProductList = lazy(() => import('./components/ProductList'));
-const Header = lazy(() => import('./components/Header'));
 const ProductDetail = lazy(() => import('./components/ProductDetail'));
 
 const App: React.FC = () => {
@@ -15,7 +14,6 @@ const App: React.FC = () => {
     <Provider store={store}>
       <Router>
         <div className="App">
-          <Header/>
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
               <Route path="/" element={<ProductList />} />

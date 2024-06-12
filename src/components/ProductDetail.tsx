@@ -6,6 +6,7 @@ import { fetchProductById } from '../api/products';
 import { addToCart, incrementQuantity, decrementQuantity } from '../store/cartSlice';
 import { RootState } from '../store';
 import { motion } from 'framer-motion';
+import Header from './Header';
 
 const ProductDetail: React.FC = () => {
   const { productId } = useParams<{ productId: string }>();
@@ -50,6 +51,8 @@ const ProductDetail: React.FC = () => {
   }
 
   return (
+    <div>
+      <Header/>
     <div className="container mx-auto p-6 mt-10 max-w-7xl">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="p-2">
@@ -94,6 +97,7 @@ const ProductDetail: React.FC = () => {
             )}
         </div>
       </div>
+    </div>
     </div>
   );
 };
