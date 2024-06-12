@@ -29,7 +29,7 @@
 1. **Clone the repository:**
 
    ```sh
-   git clone https://github.com/yourusername/react-ecommerce-store.git
+   git clone https://github.com/Khusbu853/Product-page.git
 
 2. **npm install**
 
