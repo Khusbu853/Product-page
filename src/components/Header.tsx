@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineShoppingCart, AiOutlineSearch } from 'react-icons/ai';
 
 interface HeaderProps {
@@ -10,6 +10,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ onSearch }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const itemCount = useSelector((state: RootState) => state.cart.itemCount);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -25,19 +26,24 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
     }
   };
 
+  // Check if the current pathname contains '/product/'
+  const showSearchBar = !location.pathname.includes('/product/');
+
   return (
     <header className="flex justify-between items-center p-4 bg-gray-800 text-white top-0 sticky z-50">
       <h1 className="text-2xl cursor-pointer px-3" onClick={handleHomenavigate}>Store</h1>
-      <div className="relative flex items-center w-full max-w-md">
-        <AiOutlineSearch className="absolute left-3 text-gray-500" />
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={handleSearchChange}
-          placeholder="Search products..."
-          className="w-full pl-10 pr-4 py-2 rounded bg-gray-100 text-black focus:outline-none"
-        />
-      </div>
+      {showSearchBar && (
+        <div className="relative flex items-center w-full max-w-md">
+          <AiOutlineSearch className="absolute left-3 text-gray-500" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            placeholder="Search products..."
+            className="w-full pl-10 pr-4 py-2 rounded bg-gray-100 text-black focus:outline-none"
+          />
+        </div>
+      )}
       <div className="relative px-3">
         <AiOutlineShoppingCart className="w-6 h-6" />
         {itemCount > 0 && (
@@ -51,5 +57,6 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
 };
 
 export default Header;
+
 
 
